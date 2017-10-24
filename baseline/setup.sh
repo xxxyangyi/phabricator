@@ -66,7 +66,7 @@ cd /
 # CAS
 curl -L https://github.com/iodragon/phabricator-cas/archive/master.zip -o master.zip
 unzip master.zip
-mv ./phabricator-cas-master /srv/phabricator/phabricator/phabricator/
+mv ./phabricator-cas-master /srv/phabricator/phabricator/
 /srv/phabricator/phabricator/bin/config set load-libraries '["/opt/phabricator/phabricator-cas-master/src"]'
 cd /
 

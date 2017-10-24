@@ -28,7 +28,7 @@ zypper --non-interactive ar http://download.opensuse.org/repositories/devel:/too
 zypper --gpg-auto-import-keys --non-interactive in --force-resolution nginx php-fpm php5-mbstring php5-mysql php5-curl php5-pcntl php5-gd php5-openssl php5-ldap php5-fileinfo php5-posix php5-json php5-iconv php5-ctype php5-zip php5-sockets which python3-Pygments nodejs ca-certificates ca-certificates-mozilla ca-certificates-cacert sudo subversion mercurial php5-xmlwriter nodejs-ws php5-opcache ImageMagick postfix glibc-locale supervisor
 
 # Build and install APCu
-zypper --non-interactive install --force-resolution autoconf automake binutils cpp cpp48 gcc gcc48 glibc-devel libasan0 libatomic1 libcloog-isl4 libgomp1 libisl10 libitm1 libltdl7 libmpc3 libmpfr4 libpcre16-0 libpcrecpp0 libpcreposix0 libstdc++-devel libstdc++48-devel libtool libtsan0 libxml2-devel libxml2-tools linux-glibc-devel m4 make ncurses-devel pcre-devel php5-devel php5-pear php5-zlib pkg-config readline-devel tack xz-devel zlib-devel
+zypper --non-interactive install --force-resolution autoconf unzip automake binutils cpp cpp48 gcc gcc48 glibc-devel libasan0 libatomic1 libcloog-isl4 libgomp1 libisl10 libitm1 libltdl7 libmpc3 libmpfr4 libpcre16-0 libpcrecpp0 libpcreposix0 libstdc++-devel libstdc++48-devel libtool libtsan0 libxml2-devel libxml2-tools linux-glibc-devel m4 make ncurses-devel pcre-devel php5-devel php5-pear php5-zlib pkg-config readline-devel tack xz-devel zlib-devel
 printf "\n" | pecl install apcu-4.0.10
 #zypper --non-interactive remove --force-resolution autoconf automake binutils cpp cpp48 gcc gcc48 glibc-devel libasan0 libatomic1 libcloog-isl4 libgomp1 libisl10 libitm1 libltdl7 libmpc3 libmpfr4 libpcre16-0 libpcrecpp0 libpcreposix0 libstdc++-devel libstdc++48-devel libtool libtsan0 libxml2-devel libxml2-tools linux-glibc-devel m4 ncurses-devel pcre-devel php5-devel php5-pear pkg-config readline-devel tack xz-devel zlib-devel
 
@@ -62,3 +62,15 @@ git clone https://github.com/letsencrypt/letsencrypt /srv/letsencrypt
 cd /srv/letsencrypt
 ./letsencrypt-auto-source/letsencrypt-auto --help
 cd /
+
+# CAS
+curl -L https://github.com/iodragon/phabricator-cas/archive/master.zip -o master.zip
+unzip master.zip
+mv ./phabricator-cas-master /srv/phabricator/phabricator/phabricator/
+/srv/phabricator/phabricator/bin/config set load-libraries '["/opt/phabricator/phabricator-cas-master/src"]'
+cd /
+
+curl -L  https://github.com/apereo/phpCAS/archive/master.zip -o master.zip.1
+unzip master.zip.1
+mv  ./phpCAS-master/CAS.php /srv/phabricator/phabricator/phabricator-cas-master/src/auth
+mv  ./phpCAS-master/source/ /srv/phabricator/phabricator/phabricator-cas-master/src/auth

@@ -65,7 +65,7 @@ sudo -u PHABRICATOR mv  /srv/phabricator/phabricator/phpCAS/source/ /srv/phabric
 cd /
 
 # Clone Let's Encrypt
-git clone -b master -depth 1 https://github.com/letsencrypt/letsencrypt /srv/letsencrypt
+git clone -b master --depth 1 https://github.com/letsencrypt/letsencrypt /srv/letsencrypt
 cd /srv/letsencrypt
 ./letsencrypt-auto-source/letsencrypt-auto --help
 cd /

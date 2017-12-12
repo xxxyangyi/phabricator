@@ -31,27 +31,6 @@ zypper --gpg-auto-import-keys --non-interactive in --force-resolution nginx php-
 zypper --non-interactive install --force-resolution autoconf curl unzip automake binutils cpp cpp48 gcc gcc48 glibc-devel libasan0 libatomic1 libcloog-isl4 libgomp1 libisl10 libitm1 libltdl7 libmpc3 libmpfr4 libpcre16-0 libpcrecpp0 libpcreposix0 libstdc++-devel libstdc++48-devel libtool libtsan0 libxml2-devel libxml2-tools linux-glibc-devel m4 make ncurses-devel pcre-devel php5-devel php5-pear php5-zlib pkg-config readline-devel tack xz-devel zlib-devel
 printf "\n" | pecl install apcu-4.0.10
 
-
-
-
-
-
-
-cd /
-curl -L https://github.com/iodragon/phabricator-cas/archive/master.zip -o master.zip
-unzip master.zip
-chown PHABRICATOR:wwwgrp-phabricator ./phabricator-cas-master
-
-curl -L  https://github.com/apereo/phpCAS/archive/master.zip -o master.zip.1
-unzip master.zip.1
-chown PHABRICATOR:wwwgrp-phabricator ./phabricator-cas-master
-
-
-
-
-
-
-
 #zypper --non-interactive remove --force-resolution autoconf automake binutils cpp cpp48 gcc gcc48 glibc-devel libasan0 libatomic1 libcloog-isl4 libgomp1 libisl10 libitm1 libltdl7 libmpc3 libmpfr4 libpcre16-0 libpcrecpp0 libpcreposix0 libstdc++-devel libstdc++48-devel libtool libtsan0 libxml2-devel libxml2-tools linux-glibc-devel m4 ncurses-devel pcre-devel php5-devel php5-pear pkg-config readline-devel tack xz-devel zlib-devel
 
 # Remove cached things that pecl left in /tmp/
@@ -68,6 +47,20 @@ echo "nginx:x:497:495:user for nginx:/var/lib/nginx:/bin/false" >> /etc/passwd
 echo "nginx:!:495:" >> /etc/group
 echo "PHABRICATOR:x:2000:2000:user for phabricator:/srv/phabricator:/bin/bash" >> /etc/passwd
 echo "wwwgrp-phabricator:!:2000:nginx" >> /etc/group
+
+
+cd /
+curl -L https://github.com/iodragon/phabricator-cas/archive/master.zip -o master.zip
+unzip master.zip
+chown PHABRICATOR:wwwgrp-phabricator ./phabricator-cas-master
+
+curl -L  https://github.com/apereo/phpCAS/archive/master.zip -o master.zip.1
+unzip master.zip.1
+chown PHABRICATOR:wwwgrp-phabricator ./phabricator-cas-master
+
+
+
+
 
 # Set up the Phabricator code base
 mkdir /srv/phabricator

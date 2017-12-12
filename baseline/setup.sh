@@ -65,12 +65,12 @@ cd /
 
 # CAS
 curl -L https://github.com/iodragon/phabricator-cas/archive/master.zip -o master.zip
-unzip master.zip
-mv ./phabricator-cas-master /srv/phabricator/phabricator/
-/srv/phabricator/phabricator/bin/config set load-libraries '["/srv/phabricator/phabricator/phabricator-cas-master/src"]'
+sudo -u PHABRICATOR unzip master.zip
+sudo -u PHABRICATOR mv ./phabricator-cas-master /srv/phabricator/phabricator/
+sudo -u PHABRICATOR /srv/phabricator/phabricator/bin/config set load-libraries '["/srv/phabricator/phabricator/phabricator-cas-master/src"]'
 cd /
 
 curl -L  https://github.com/apereo/phpCAS/archive/master.zip -o master.zip.1
-unzip master.zip.1
-mv  ./phpCAS-master/CAS.php /srv/phabricator/phabricator/phabricator-cas-master/src/auth
-mv  ./phpCAS-master/source/ /srv/phabricator/phabricator/phabricator-cas-master/src/auth
+sudo -u PHABRICATOR unzip master.zip.1
+sudo -u PHABRICATOR mv  ./phpCAS-master/CAS.php /srv/phabricator/phabricator/phabricator-cas-master/src/auth
+sudo -u PHABRICATOR mv  ./phpCAS-master/source/ /srv/phabricator/phabricator/phabricator-cas-master/src/auth

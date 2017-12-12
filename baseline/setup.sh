@@ -60,8 +60,8 @@ sudo -u PHABRICATOR git clone -b master --depth 1 https://www.github.com/PHPOffi
 sudo -u PHABRICATOR git clone -b master --depth 1 https://github.com/iodragon/phabricator-cas.git /srv/phabricator/phabricator/phabricator-cas-master
 sudo -u PHABRICATOR git clone -b master --depth 1 https://github.com/apereo/phpCAS.git /srv/phabricator/phabricator/phpCAS
 
-sudo -u PHABRICATOR mv  /srv/phabricator/phabricator/phpCAS-master/CAS.php /srv/phabricator/phabricator/phabricator-cas-master/src/auth
-sudo -u PHABRICATOR mv  /srv/phabricator/phabricator/phpCAS-master/source/ /srv/phabricator/phabricator/phabricator-cas-master/src/auth
+sudo -u PHABRICATOR mv  /srv/phabricator/phabricator/phpCAS/CAS.php /srv/phabricator/phabricator/phabricator-cas-master/src/auth
+sudo -u PHABRICATOR mv  /srv/phabricator/phabricator/phpCAS/source/ /srv/phabricator/phabricator/phabricator-cas-master/src/auth
 cd /
 
 # Clone Let's Encrypt

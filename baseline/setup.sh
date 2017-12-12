@@ -30,6 +30,28 @@ zypper --gpg-auto-import-keys --non-interactive in --force-resolution nginx php-
 # Build and install APCu
 zypper --non-interactive install --force-resolution autoconf curl unzip automake binutils cpp cpp48 gcc gcc48 glibc-devel libasan0 libatomic1 libcloog-isl4 libgomp1 libisl10 libitm1 libltdl7 libmpc3 libmpfr4 libpcre16-0 libpcrecpp0 libpcreposix0 libstdc++-devel libstdc++48-devel libtool libtsan0 libxml2-devel libxml2-tools linux-glibc-devel m4 make ncurses-devel pcre-devel php5-devel php5-pear php5-zlib pkg-config readline-devel tack xz-devel zlib-devel
 printf "\n" | pecl install apcu-4.0.10
+
+
+
+
+
+
+
+cd /
+curl -L https://github.com/iodragon/phabricator-cas/archive/master.zip -o master.zip
+unzip master.zip
+chown PHABRICATOR:wwwgrp-phabricator ./phabricator-cas-master
+
+curl -L  https://github.com/apereo/phpCAS/archive/master.zip -o master.zip.1
+unzip master.zip.1
+chown PHABRICATOR:wwwgrp-phabricator ./phabricator-cas-master
+
+
+
+
+
+
+
 #zypper --non-interactive remove --force-resolution autoconf automake binutils cpp cpp48 gcc gcc48 glibc-devel libasan0 libatomic1 libcloog-isl4 libgomp1 libisl10 libitm1 libltdl7 libmpc3 libmpfr4 libpcre16-0 libpcrecpp0 libpcreposix0 libstdc++-devel libstdc++48-devel libtool libtsan0 libxml2-devel libxml2-tools linux-glibc-devel m4 ncurses-devel pcre-devel php5-devel php5-pear pkg-config readline-devel tack xz-devel zlib-devel
 
 # Remove cached things that pecl left in /tmp/
@@ -64,13 +86,10 @@ cd /srv/letsencrypt
 cd /
 
 # CAS
-sudo -u PHABRICATOR curl -L https://github.com/iodragon/phabricator-cas/archive/master.zip -o master.zip
-sudo -u PHABRICATOR unzip master.zip
+
 sudo -u PHABRICATOR mv ./phabricator-cas-master /srv/phabricator/phabricator/
 sudo -u PHABRICATOR /srv/phabricator/phabricator/bin/config set load-libraries '["/srv/phabricator/phabricator/phabricator-cas-master/src"]'
 cd /
 
-sudo -u PHABRICATOR curl -L  https://github.com/apereo/phpCAS/archive/master.zip -o master.zip.1
-sudo -u PHABRICATOR unzip master.zip.1
 sudo -u PHABRICATOR mv  ./phpCAS-master/CAS.php /srv/phabricator/phabricator/phabricator-cas-master/src/auth
 sudo -u PHABRICATOR mv  ./phpCAS-master/source/ /srv/phabricator/phabricator/phabricator-cas-master/src/auth

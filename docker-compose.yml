@@ -1,14 +1,14 @@
 version: '2'
 services:
   phabricator:
-    restart: always
+#    restart: always
     ports:
      - "62443:443"
      - "62080:80"
      - "62022:22"
-    volumes:
-     - /opt/docker-volumes/phabricator/repos:/repos
-     - /opt/docker-volumes/phabricator/extensions:/srv/phabricator/phabricator/src/extensions
+#    volumes:
+#     - /opt/docker-volumes/phabricator/repos:/repos
+#     - /opt/docker-volumes/phabricator/extensions:/srv/phabricator/phabricator/src/extensions
     depends_on:
      - mysql
     environment:
@@ -17,11 +17,11 @@ services:
      - MYSQL_PASS=phabricator
      - PHABRICATOR_REPOSITORY_PATH=/repos
      - PHABRICATOR_HOST=w3.dev.migame.g.mi.com
-    image: phabricator:latest
+    image: tuberose001/phabricator:latest
   mysql:
-    restart: always
-    volumes:
-     - /opt/docker-volumes/phabricator/mysql:/var/lib/mysql
+#    restart: always
+#    volumes:
+#     - /opt/docker-volumes/phabricator/mysql:/var/lib/mysql
     image:  mysql:5.7.14
     environment:
      - MYSQL_ROOT_PASSWORD=phabricator

@@ -67,7 +67,7 @@ cd /
 curl -L https://github.com/iodragon/phabricator-cas/archive/master.zip -o master.zip
 unzip master.zip
 mv ./phabricator-cas-master /srv/phabricator/phabricator/
-/srv/phabricator/phabricator/bin/config set load-libraries '["/srv/phabricator/phabricator-cas-master/src"]'
+/srv/phabricator/phabricator/bin/config set load-libraries '["/srv/phabricator/phabricator/phabricator-cas-master/src"]'
 cd /
 
 curl -L  https://github.com/apereo/phpCAS/archive/master.zip -o master.zip.1

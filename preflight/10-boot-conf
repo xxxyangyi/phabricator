@@ -263,6 +263,8 @@ if [ "$SCRIPT_BEFORE_MIGRATION" != "" ]; then
   popd
 fi
 
+sudo -u "$PHABRICATOR_VCS_USER" ./bin/config set load-libraries '["/srv/phabricator/phabricator/phabricator-cas-master/src"]'
+
 # The search database may need to be repaired, and if so, will prevent bin/storage upgrade from working
 # so preemptively run a repair on that database now.
 set +x

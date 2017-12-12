@@ -48,41 +48,24 @@ echo "nginx:!:495:" >> /etc/group
 echo "PHABRICATOR:x:2000:2000:user for phabricator:/srv/phabricator:/bin/bash" >> /etc/passwd
 echo "wwwgrp-phabricator:!:2000:nginx" >> /etc/group
 
-
-cd /
-curl -L https://github.com/iodragon/phabricator-cas/archive/master.zip -o master.zip
-unzip master.zip
-chown PHABRICATOR:wwwgrp-phabricator ./phabricator-cas-master
-
-curl -L  https://github.com/apereo/phpCAS/archive/master.zip -o master.zip.1
-unzip master.zip.1
-chown PHABRICATOR:wwwgrp-phabricator ./phabricator-cas-master
-
-
-
-
-
 # Set up the Phabricator code base
 mkdir /srv/phabricator
 chown PHABRICATOR:wwwgrp-phabricator /srv/phabricator
 cd /srv/phabricator
-sudo -u PHABRICATOR git clone https://www.github.com/phacility/libphutil.git /srv/phabricator/libphutil
-sudo -u PHABRICATOR git clone https://www.github.com/phacility/arcanist.git /srv/phabricator/arcanist
-sudo -u PHABRICATOR git clone https://www.github.com/phacility/phabricator.git /srv/phabricator/phabricator
-sudo -u PHABRICATOR git clone https://www.github.com/PHPOffice/PHPExcel.git /srv/phabricator/PHPExcel
+sudo -u PHABRICATOR git clone -b master -depth 1 https://www.github.com/phacility/libphutil.git /srv/phabricator/libphutil
+sudo -u PHABRICATOR git clone -b master -depth 1 https://www.github.com/phacility/arcanist.git /srv/phabricator/arcanist
+sudo -u PHABRICATOR git clone -b master -depth 1 https://www.github.com/phacility/phabricator.git /srv/phabricator/phabricator
+sudo -u PHABRICATOR git clone -b master -depth 1 https://www.github.com/PHPOffice/PHPExcel.git /srv/phabricator/PHPExcel
+
+sudo -u PHABRICATOR git clone -b master -depth 1 https://github.com/iodragon/phabricator-cas.git /srv/phabricator/phabricator/phabricator-cas-master
+sudo -u PHABRICATOR git clone -b master -depth 1 https://github.com/apereo/phpCAS.git /srv/phabricator/phabricator/phpCAS
+
+sudo -u PHABRICATOR mv  /srv/phabricator/phabricator/phpCAS-master/CAS.php /srv/phabricator/phabricator/phabricator-cas-master/src/auth
+sudo -u PHABRICATOR mv  /srv/phabricator/phabricator/phpCAS-master/source/ /srv/phabricator/phabricator/phabricator-cas-master/src/auth
 cd /
 
 # Clone Let's Encrypt
-git clone https://github.com/letsencrypt/letsencrypt /srv/letsencrypt
+git clone -b master -depth 1 https://github.com/letsencrypt/letsencrypt /srv/letsencrypt
 cd /srv/letsencrypt
 ./letsencrypt-auto-source/letsencrypt-auto --help
 cd /
-
-# CAS
-
-sudo -u PHABRICATOR mv ./phabricator-cas-master /srv/phabricator/phabricator/
-sudo -u PHABRICATOR /srv/phabricator/phabricator/bin/config set load-libraries '["/srv/phabricator/phabricator/phabricator-cas-master/src"]'
-cd /
-
-sudo -u PHABRICATOR mv  ./phpCAS-master/CAS.php /srv/phabricator/phabricator/phabricator-cas-master/src/auth
-sudo -u PHABRICATOR mv  ./phpCAS-master/source/ /srv/phabricator/phabricator/phabricator-cas-master/src/auth

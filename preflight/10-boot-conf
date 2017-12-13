@@ -249,6 +249,9 @@ fi
 sudo -u "$PHABRICATOR_VCS_USER" ./bin/config set notification.servers '[{"type": "client","host": "'$PHABRICATOR_HOST'","port": '$APHLICT_PORT',"protocol": "'$APHLICT_PROTOCOL'","path": "/ws/"},{"type": "admin","host": "127.0.0.1","port": 22281,"protocol": "http"}]'
 unset APHLICT_PROTOCOL
 unset APHLICT_PORT
+
+sudo -u "$PHABRICATOR_VCS_USER" ./bin/config set load-libraries '["/srv/phabricator/phabricator/phabricator-cas/src"]'
+
 popd
 
 if [ "$ENABLE_APCU" == "true" ]; then
@@ -263,7 +266,6 @@ if [ "$SCRIPT_BEFORE_MIGRATION" != "" ]; then
   popd
 fi
 
-sudo -u "$PHABRICATOR_VCS_USER" ./bin/config set load-libraries '["/srv/phabricator/phabricator/phabricator-cas/src"]'
 
 # The search database may need to be repaired, and if so, will prevent bin/storage upgrade from working
 # so preemptively run a repair on that database now.

@@ -1,7 +1,7 @@
 version: '2'
 services:
   phabricator:
-#    restart: always
+    restart: always
     ports:
      - "62443:443"
      - "62080:80"
@@ -16,8 +16,8 @@ services:
      - MYSQL_USER=root
      - MYSQL_PASS=phabricator
      - PHABRICATOR_REPOSITORY_PATH=/repos
-     - PHABRICATOR_HOST=w3.dev.migame.g.mi.com
-    image: tuberose001/phabricator:latest
+     - PHABRICATOR_HOST=127.0.0.1:62080
+    image: tuberose001/phabricator:121411
   mysql:
 #    restart: always
 #    volumes:
